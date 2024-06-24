@@ -1,0 +1,395 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Process" this:Process.in_DateFinancialReport_Kondor="20240404" this:Process.in_FinacialReport_RealizedCurrency_Name="RealizedCurrency.xls" this:Process.in_FinacialReport_RealizedCurrency_Path="C:\P&amp;L\Kondor_Extraction" this:Process.in_FinacialReport_FOWithDate_Nam="FOwithDate.xls" this:Process.in_FinacialReport_FOWithDate_Path="C:\P&amp;L\Kondor_Extraction" this:Process.in_FinacialReport_FOWithoutDate_Name="FOwithoutDate.xls" this:Process.in_FinacialReport_FOWithoutDate_Path="C:\P&amp;L\Kondor_Extraction" this:Process.in_Macros_FO_Path="C:\P&amp;L\FO" this:Process.in_Macros_FO_GrossAmount_Path="C:\P&amp;L\FO_GrossAmount" this:Process.in_Macros_RealizedCurrency="C:\P&amp;L\RC" this:Process.in_Coutportage_Path="C:\P&amp;L" this:Process.in_CoutPortage_FileName="cout de portage.xlsx" this:Process.in_feuille_CocChange="coc change" this:Process.in_feuille_CocOption="coc option" this:Process.in_FeuilleSynthese="Synthèse" this:Process.in_OtherDesk_Path="C:\P&amp;L\OtherDesks.xlsm" this:Process.in_FeuilleRealizedCurrency="Bonds" this:Process.in_Date_Format2="04-04-2024" this:Process.in_Date_Format1="04/04/2024" this:Process.in_CPAM_Path="C:\P&amp;L\New_CPAM.xlsm" this:Process.in_Feuille_toInsert_RC="DR" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
+    <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="io_StepWorkflow" Type="InOutArgument(x:String)" />
+    <x:Property Name="in_DateFinancialReport_Kondor" Type="InArgument(x:String)" />
+    <x:Property Name="in_FinacialReport_RealizedCurrency_Name" Type="InArgument(x:String)" />
+    <x:Property Name="in_FinacialReport_RealizedCurrency_Path" Type="InArgument(x:String)" />
+    <x:Property Name="in_FinacialReport_FOWithDate_Nam" Type="InArgument(x:String)" />
+    <x:Property Name="in_FinacialReport_FOWithDate_Path" Type="InArgument(x:String)" />
+    <x:Property Name="in_FinacialReport_FOWithoutDate_Name" Type="InArgument(x:String)" />
+    <x:Property Name="in_FinacialReport_FOWithoutDate_Path" Type="InArgument(x:String)" />
+    <x:Property Name="in_Macros_FO_Path" Type="InArgument(x:String)" />
+    <x:Property Name="in_Macros_FO_GrossAmount_Path" Type="InArgument(x:String)" />
+    <x:Property Name="in_Macros_RealizedCurrency" Type="InArgument(x:String)" />
+    <x:Property Name="in_Coutportage_Path" Type="InArgument(x:String)" />
+    <x:Property Name="in_CoutPortage_FileName" Type="InArgument(x:String)" />
+    <x:Property Name="in_feuille_CocChange" Type="InArgument(x:String)" />
+    <x:Property Name="in_feuille_CocOption" Type="InArgument(x:String)" />
+    <x:Property Name="in_FeuilleSynthese" Type="InArgument(x:String)" />
+    <x:Property Name="in_OtherDesk_Path" Type="InArgument(x:String)" />
+    <x:Property Name="in_FeuilleRealizedCurrency" Type="InArgument(x:String)" />
+    <x:Property Name="in_Date_Format2" Type="InArgument(x:String)" />
+    <x:Property Name="in_Date_Format1" Type="InArgument(x:String)" />
+    <x:Property Name="in_CPAM_Path" Type="InArgument(x:String)" />
+    <x:Property Name="in_Feuille_toInsert_RC" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>561,2704</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="50">
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Windows.Forms</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.Core.Activities.Orchestrator</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="80">
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Windows.Forms</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="512,2559" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="Process" Name="Workflow_Name" />
+      <Variable x:TypeArguments="x:Boolean" Name="FinancialReport_Existe" />
+      <Variable x:TypeArguments="x:Boolean" Name="CoutPortageFile_Existe" />
+      <Variable x:TypeArguments="x:Boolean" Name="CoutPortageFile_Compatible" />
+      <Variable x:TypeArguments="x:String" Name="RealizedCurrency_Montant" />
+      <Variable x:TypeArguments="x:String" Name="Chemin_Rapport" />
+      <Variable x:TypeArguments="ui:WorkbookApplication" Name="WS_OtherDesk" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Logs\Log_Debut.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,145" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Logs\Log_Debut.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Workflow_name">[Workflow_Name]</InArgument>
+        <InOutArgument x:TypeArguments="x:String" x:Key="io_StepWorkflow">[io_StepWorkflow]</InOutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Verification_Prerequis\Verification_presence_FinancialReport.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,145" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Verification_Prerequis\Verification_presence_FinancialReport.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InOutArgument x:TypeArguments="x:String" x:Key="io_StepWorkflow">[io_StepWorkflow]</InOutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_FinacialReport_FOWithoutDate_Path">[in_FinacialReport_FOWithoutDate_Path]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_FinacialReport_FOWithoutDate_Name">[in_FinacialReport_FOWithoutDate_Name]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_FinacialReport_FOWithDate_Path">[in_FinacialReport_FOWithDate_Path]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_FinacialReport_FOWithDate_Name">[in_FinacialReport_FOWithDate_Nam]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_FinacialReport_RealizedCurrency_Path">[in_FinacialReport_RealizedCurrency_Path]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_FinacialReport_RealizedCurrency_Name">[in_FinacialReport_RealizedCurrency_Name]</InArgument>
+        <OutArgument x:TypeArguments="x:Boolean" x:Key="out_FinancialReports_Existe">[FinancialReport_Existe]</OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Date">[in_DateFinancialReport_Kondor]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <If Condition="[not FinancialReport_Existe]" sap:VirtualizedContainerService.HintSize="450,656" sap2010:WorkflowViewState.IdRef="If_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,25" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Throw Exception="[new BusinessRuleException(&quot;Financial report inexistant&quot;)]" sap:VirtualizedContainerService.HintSize="354,113" sap2010:WorkflowViewState.IdRef="Throw_1" />
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,461" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:CopyFolderX ContinueOnError="{x:Null}" DisplayName="Copy Folder" From="[in_FinacialReport_FOWithoutDate_Path.TrimEnd(&quot;\&quot;c)  + &quot;\&quot;  + in_DateFinancialReport_Kondor + &quot;_Matin&quot;]" sap:VirtualizedContainerService.HintSize="354,191" sap2010:WorkflowViewState.IdRef="CopyFolderX_1" IncludeSubfolders="True" Overwrite="True" To="[in_Config(&quot;Chemin_ArchivageExtraction&quot;).ToString]">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:CopyFolderX>
+          <ui:CopyFolderX ContinueOnError="{x:Null}" DisplayName="Copy Folder" From="[in_FinacialReport_FOWithoutDate_Path.TrimEnd(&quot;\&quot;c)  + &quot;\&quot;  + in_DateFinancialReport_Kondor+ &quot;_Soir&quot;]" sap:VirtualizedContainerService.HintSize="354,182" sap2010:WorkflowViewState.IdRef="CopyFolderX_2" IncludeSubfolders="True" Overwrite="True" To="[in_Config(&quot;Chemin_ArchivageExtraction&quot;).ToString]">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:CopyFolderX>
+        </Sequence>
+      </If.Else>
+    </If>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Preparation_Prerequis\Copie_Financials_Report.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,145" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Preparation_Prerequis\Copie_Financials_Report.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InOutArgument x:TypeArguments="x:String" x:Key="io_StepWorkflow">
+          <VisualBasicReference x:TypeArguments="x:String" ExpressionText="io_StepWorkflow" />
+        </InOutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_FinacialReport_RealizedCurrency_Name">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_FinacialReport_RealizedCurrency_Name" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_FinacialReport_RealizedCurrency_Path">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_FinacialReport_RealizedCurrency_Path" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_FinacialReport_FOWithDate_Name">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_FinacialReport_FOWithDate_Nam" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_FinacialReport_FOWithDate_Path">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_FinacialReport_FOWithDate_Path" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_FinacialReport_FOWithoutDate_Name">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_FinacialReport_FOWithoutDate_Name" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_FinacialReport_FOWithoutDate_Path">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_FinacialReport_FOWithoutDate_Path" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Macros_FO_Path">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Macros_FO_Path" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Macros_FO_GrossAmount_Path">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Macros_FO_GrossAmount_Path" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Macros_RealizedCurrency">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Macros_RealizedCurrency" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Date">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_DateFinancialReport_Kondor" />
+        </InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Verification_Prerequis\Verification_Presence_coutPortage_File.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,145" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="Verification_Prerequis\Verification_Presence_coutPortage_File.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InOutArgument x:TypeArguments="x:String" x:Key="io_StepWorkflow">[io_StepWorkflow]</InOutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Coutportage_Path">[in_Coutportage_Path]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_CoutPortage_FileName">[in_CoutPortage_FileName]</InArgument>
+        <OutArgument x:TypeArguments="x:Boolean" x:Key="out_CoutPortageFile_Existe">[CoutPortageFile_Existe]</OutArgument>
+        <OutArgument x:TypeArguments="x:Boolean" x:Key="out_CoutPortageFile_Compatible">[CoutPortageFile_Compatible]</OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_feuille_CocChange">[in_feuille_CocChange]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_feuille_CocOption">[in_feuille_CocOption]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Date_JJ_MM_YYYY">[in_TransactionItem.SpecificContent("Date_Format1").ToString]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <If Condition="[not CoutPortageFile_Existe]" sap:VirtualizedContainerService.HintSize="450,57" sap2010:WorkflowViewState.IdRef="If_3">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,201" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Throw Exception="[new BusinessRuleException(&quot;ficher cout de portage inexistant&quot;)]" sap:VirtualizedContainerService.HintSize="354,113" sap2010:WorkflowViewState.IdRef="Throw_2" />
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,103" sap2010:WorkflowViewState.IdRef="Sequence_5">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </If.Else>
+    </If>
+    <If Condition="[not CoutPortageFile_Compatible]" sap:VirtualizedContainerService.HintSize="450,57" sap2010:WorkflowViewState.IdRef="If_4">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,198" sap2010:WorkflowViewState.IdRef="Sequence_6">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Throw Exception="[new BusinessRuleException(&quot;date(s) manquante(s) dans le ficher cout de portage&quot;)]" sap:VirtualizedContainerService.HintSize="354,113" sap2010:WorkflowViewState.IdRef="Throw_3" />
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,100" sap2010:WorkflowViewState.IdRef="Sequence_7">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </If.Else>
+    </If>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Calcul_CoC\Calcul_CoC.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,145" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="Calcul_CoC\Calcul_CoC.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InOutArgument x:TypeArguments="x:String" x:Key="io_StepWorkflow">[io_StepWorkflow]</InOutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_OtherDesk_Path">[in_OtherDesk_Path]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_FeuilleSynthese">[in_FeuilleSynthese]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Coutportage_FileName">[in_CoutPortage_FileName]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Feuille_CocChange">[in_feuille_CocChange]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Coutportage_Path">[in_Coutportage_Path]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Feuille_Cocoption">[in_feuille_CocOption]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Date_Format1">[in_Date_Format1]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_ListeExtraction_Name">[in_Config("Liste_Extraction_A_Verifier").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Chemin_Archive_Kondor">[in_Config("Chemin_FinancialReport_Kondor").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Chemin_Archive">[in_Config("Chemin_ArchivageExtraction").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_DateFinancialReport_Kondor">[in_DateFinancialReport_Kondor]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Preparation_Prerequis\Recupperation_RealizedCurrency_Montant.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,145" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Preparation_Prerequis\Recupperation_RealizedCurrency_Montant.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InOutArgument x:TypeArguments="x:String" x:Key="io_StepWorkflow">[io_StepWorkflow]</InOutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Macros_RealizedCurrency_Path">[in_Macros_RealizedCurrency]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_FeuilleRealizedCurrency">[in_FeuilleRealizedCurrency]</InArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_RealizedCurrency_Montant">[RealizedCurrency_Montant]</OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_date">[in_Date_Format2]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Calcul CPAM\Calcul_CPAM.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,145" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="Calcul CPAM\Calcul_CPAM.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InOutArgument x:TypeArguments="x:String" x:Key="io_StepWorkflow">
+          <VisualBasicReference x:TypeArguments="x:String" ExpressionText="io_StepWorkflow" />
+        </InOutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_RealizedCurrency">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="RealizedCurrency_Montant" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_CPAM_Path">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_CPAM_Path" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Feuille_toInsert_RC">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Feuille_toInsert_RC" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_dateFormat1">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Date_Format1" />
+        </InArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_CheminRapport">
+          <VisualBasicReference x:TypeArguments="x:String" ExpressionText="Chemin_Rapport" />
+        </OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_OtherDeskChemin">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_OtherDesk_Path" />
+        </InArgument>
+        <OutArgument x:TypeArguments="ui:WorkbookApplication" x:Key="out_WS_OtherDesk">
+          <VisualBasicReference x:TypeArguments="ui:WorkbookApplication" ExpressionText="WS_OtherDesk" />
+        </OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Chemin_Archive">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;Chemin_ArchivageExtraction&quot;).ToString" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Date_FinancialReport">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_DateFinancialReport_Kondor" />
+        </InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:ExcelCloseWorkbook DisplayName="Close Workbook" sap:VirtualizedContainerService.HintSize="450,92" sap2010:WorkflowViewState.IdRef="ExcelCloseWorkbook_1" Workbook="[WS_OtherDesk]" />
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Mail\Envoie_Mail.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,145" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_11" UnSafe="False" WorkflowFileName="Mail\Envoie_Mail.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InOutArgument x:TypeArguments="x:String" x:Key="io_StepWorkflow">[io_StepWorkflow]</InOutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_MailTo">[in_Config("Mail_Metier").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_MailSubject">[in_Config("Subject_Mail").ToString.Replace("[Date]",in_Date_Format1)]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_MailBody">[in_Config("Corps_Mail").ToString.Replace("[Date]",in_Date_Format1)]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_attachment">[Chemin_Rapport]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_MailCC">[in_Config("Mail_CC").ToString]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:SetAsset TimeoutMS="{x:Null}" AssetName="Rapport_P&amp;L_DerniereDate" DisplayName="Set Asset" sap:VirtualizedContainerService.HintSize="450,226" sap2010:WorkflowViewState.IdRef="SetAsset_1" Value="[in_Date_Format1]" />
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Logs\Log_Fin.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,136" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Logs\Log_Fin.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Workflow_name">[Workflow_Name]</InArgument>
+        <InOutArgument x:TypeArguments="x:String" x:Key="io_StepWorkflow">[io_StepWorkflow]</InOutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+  </Sequence>
+</Activity>
